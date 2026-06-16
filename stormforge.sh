@@ -33,11 +33,45 @@ set -euo pipefail
 IFS=\$'\\n\\t'
 
 usage() {
-    echo "Usage: ./${script_name}.sh"
+    echo "Usage: ./${script_name}.sh [options]"
+    echo ""
+    echo "Options:"
+    echo " --help  Show this help message and exit"
+    echo ""
+    echo "Examples:"
+    echo " ./${script_name}.sh --help"
+    echo " ./${script_name}.sh"
+}
+
+log() {
+    local level="\$1"
+    shift
+    echo "[\$(date '+%Y-%m-%d %H:%M:%S')] [\$level] \$*"
+}
+
+error() {
+    log "ERROR" "\$@" >&2
+    exit 1
+}
+
+run() {
+    log "INFO" "${project_name} starting..."
+    # TODO: implement core logic here
 }
 
 main() {
-    echo "[*] ${project_name} starting..."
+    case "\${1:-}" in
+    --help|-h)
+	usage
+	exit 0
+	;;
+    "")
+	run
+	;;
+    *)
+	error "Unknown argument: \$1"
+	;;
+    esac
 }
 
 main "\$@"

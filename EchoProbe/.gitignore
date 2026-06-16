@@ -1,0 +1,16 @@
+
+# Logs
+logs/
+*.log
+
+# Config overrides
+*.local.conf
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.tmp
+*.bak
+
